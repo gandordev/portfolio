@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./resources/logo/logo_w_bg.ico" type="image/x-icon">
+    <title>gandordev's portfolio</title>
+</head>
+<body>
+    <header id="navbar" class="navbar">
+        <div class="introduction">
+            <img src="./resources/logo/logo.svg" alt="logo" class="nav-logo">
+            
+            <h1>gandordev</h1>
+            
+            <p style="font-family: serif;">Functionality over design.</p>
+            
+        </div>
+
+        <nav class="buttons">
+            <div class="social-media">
+                <a href="https://github.com/gandordev" target="_blank" rel="noopener noreferrer">Github</a>
+                <a href="https://www.linkedin.com/in/gabriel-ramos-lopez/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </div>
+
+            <div class="contact">
+                <a href="" id="send-mail">Contact me</a>
+            </div>
+        </div>
+    </header>
+    <section id="body" class="body">
+        <div class="about-me">
+            <h2>About me</h2>
+            <p>
+                Backend Developer specialized in Python.<br><br>
+                Throughout my career, I have worked on data extraction and loading processes involving external platforms, developed APIs for notification management and inter-service communication using asynchronous messaging (NATS), and migrated legacy processes from C# to Python. I have also contributed to the frontend development of internal applications using Vue, as well as automated business processes leveraging rule-based systems and Large Language Models (LLMs).<br><br>
+                Outside of work, I am passionate about open-source software and enjoy building my own tools and personal projects.
+            </p>
+        </div>
+
+        <div class="projects">
+            <h2>Projects</h2>
+            <div id="gh-projects" class="gh-projects">
+
+            </div>
+        </div>
+    </section>
+    
+</body>
+<script>
+    mailField = document.getElementById("send-mail");
+    mailField.addEventListener('click', () => {
+        let mailTo = "trabajosa49@gmail.com";
+        let emailSub = "Hi! I saw your portfolio and wanted to say...";
+
+        window.location.href = `mailto:${mailTo}&subject=${emailSub}`
+    });
+</script>
+<style>
+    /*** General ***/
+    *:not(h1,h2) {
+        font-family: consolas;
+        font-size: large;
+        margin: 0; 
+        padding: 0;
+
+        border-style: groove; /* test */
+
+    }
+
+    h1,h2 {
+        margin: 0 auto 15px auto;
+        padding: 0;
+    }
+    h2 {
+        margin-top: 20px;
+    }
+
+    a:hover {
+        cursor: pointer;
+    }
+
+    img {
+        margin: 0 auto;
+    }
+
+    body {
+        background-color: #faebd7;
+    }
+    /******************/
+
+    /*** Navbar ***/
+    .navbar {
+        align-content: center;
+        display: grid;
+        width: auto;
+    }
+
+    .nav-logo {
+        max-width: 100px;
+        user-select: none;
+    }
+
+    /* Introduction */
+    .introduction {
+        display: grid;
+        align-items: center;
+        margin-bottom: 1em;
+    }
+
+    .introduction>p {
+        margin: 0 auto;
+    }
+
+    .buttons {
+        display: flex;
+        align-items: center;
+        margin: 0 auto;
+        max-width: fit-content;
+    }
+
+    .buttons>* {
+        margin: 0 20px
+    }
+
+    .buttons .social-media>* {
+        margin-right: 1em;
+    }
+
+    /*******************/
+
+
+</style>
+</html>
