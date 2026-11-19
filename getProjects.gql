@@ -1,0 +1,30 @@
+query {
+  search(
+    query: "user:<GITHUB_USERNAME> topic:<GITHUB_TOPIC> sort:updated-desc"
+    type: REPOSITORY
+    first: 20
+  ) {
+    nodes {
+      ... on Repository {
+        name
+        description
+        url
+        isArchived
+        homepageUrl # deployed url
+        # Projects langs
+        languages(first: 10, orderBy: { field: SIZE, direction: DESC }) {
+          nodes {
+            name
+          }
+        }
+        # Latest release if avaiable
+        latestRelease {
+          tagName
+          name
+          publishedAt
+          url
+        }
+      }
+    }
+  }
+}
