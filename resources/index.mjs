@@ -1,17 +1,17 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 
-const graphqlUrl = process.env.GITHUB_GRAPHQL_API_URL
-const token = process.env.GITHUB_AUTHORIZATION_TOKEN;
-const username = process.env.GITHUB_USERNAME;
-const topic = process.env.GITHUB_TOPIC;
-const outputFile = process.env.GITHUB_REPOS_OUTPUT_FILE;
+const graphqlUrl = process.env.GH_GRAPHQL_API_URL
+const token = process.env.GH_AUTHORIZATION_TOKEN;
+const username = process.env.GH_USERNAME;
+const topic = process.env.GH_TOPIC;
+const outputFile = process.env.GH_REPOS_OUTPUT_FILE;
 
 const gqlPath = path.resolve(process.cwd(), "resources/getProjects.gql");
 const rawGql = await fs.readFile(gqlPath, "utf8");
 const query = rawGql.
-  replace("<GITHUB_USERNAME>", username).
-  replace("<GITHUB_TOPIC>", topic);
+  replace("<GH_USERNAME>", username).
+  replace("<GH_TOPIC>", topic);
 
 function Project(name, description, languages, url, homepageUrl, release, isArchived) {
     this.name=name // string
