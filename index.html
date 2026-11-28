@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="./resources/logo/logo_w_bg.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./resources/styles.css">
     <title>gandordev's portfolio</title>
 </head>
+
 <body>
     <header id="navbar" class="navbar">
         <div class="introduction">
             <img src="./resources/logo/logo.svg" alt="logo" class="nav-logo">
-            
+
             <h1>gandordev</h1>
-            
+
             <p style="font-family: serif;">Functionality over design.</p>
-            
+
         </div>
 
         <nav class="buttons">
             <a href="https://github.com/gandordev" target="_blank" rel="noopener noreferrer">Github</a>
-            <a href="https://www.linkedin.com/in/gabriel-ramos-lopez/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://www.linkedin.com/in/gabriel-ramos-lopez/" target="_blank"
+                rel="noopener noreferrer">LinkedIn</a>
             <a href="" id="send-mail">Contact me</a>
-        </div>
+            </div>
     </header>
     <section id="body" class="body">
         <div class="about-me">
@@ -29,14 +33,16 @@
             <p>
                 <span class="important">Backend Developer</span> specialized in Python.<br><br>
                 Throughout my career, I have worked on <span class="important">data extraction</span>
-                and loading processes involving external platforms, 
+                and loading processes involving external platforms,
                 <span class="important">developed APIs</span> for notification management and inter-service
-                communication using asynchronous messaging (NATS), and 
-                <span class="important">migrated legacy processes</span> from C# to Python. I have also contributed to the 
-                <span class="important">frontend development </span> of internal applications using Vue, as well as 
-                automated business processes leveraging rule-based systems and 
+                communication using asynchronous messaging (NATS), and
+                <span class="important">migrated legacy processes</span> from C# to Python. I have also contributed to
+                the
+                <span class="important">frontend development </span> of internal applications using Vue, as well as
+                automated business processes leveraging rule-based systems and
                 <span class="important">Large Language Models (LLMs)</span>.<br><br>
-                Outside of work, I am passionate about open-source software and enjoy building my own tools and personal projects.
+                Outside of work, I am passionate about open-source software and enjoy building my own tools and personal
+                projects.
             </p>
         </div>
 
@@ -47,224 +53,13 @@
                     No projects found or the developer did something wrong while loading them.
                 </div>
 
-                <br><br><a href="https://github.com/topics/gandordev" target="_blank" rel="noopener noreferrer">See all my published projects</a>
+                <br><br><a href="https://github.com/topics/gandordev" target="_blank" rel="noopener noreferrer">See all
+                    my published projects</a>
             </div>
         </div>
     </section>
 
 </body>
-<script>
-    async function getProjects() {
-        const container = document.getElementById("gh-projects");
-        let data = null;
+<script src="./resources/script.js" defer></script>
 
-        try {
-            const res = await fetch("./out/repos.json", { cache: "no-store" });
-            if (!res.ok) {
-                throw new Error(`${res.status}: No repos found`);
-            }
-
-            data = await res.json();
-            
-        } catch (err) {
-            console.error("Error loading repos:", err);
-        }
-        if (data?.repos.length === 0)
-            return;
-
-        container.innerHTML = ''
-        const projects = data.repos
-
-        
-        // Load projects in DOM
-        projects.forEach(project => {
-            const name = project.isArchived 
-                ? `<span style="color: #eab308;">(Archived)</span> ${project.name}` 
-                : project.name 
-
-            // font-weight: bold;
-            const desc = project?.description || 'No description available'
-
-            const seeMore = desc.length < 100 
-                ? desc 
-                : desc.substring(0,100) + `... <a href="${project.url}" target="_blank" rel="noopener noreferrer">(see more)</a>`;
-
-            const preview = project.homepageUrl != null && project.homepageUrl !== '' 
-                ? `<br><br><a href="${project.homepageUrl}" target="_blank" rel="noopener noreferrer"><button type="button" class="action-btn">Preview</button></a>` 
-                : ''
-
-            const release = project.release != null && project.release !== ''
-                ? `<br><br><a href="${project.release}" target="_blank" rel="noopener noreferrer"><button type="button" class="action-btn">Get latest release</button></a>`
-                : ''
-            
-            // Generate box
-            container.innerHTML += `
-            <div class='project-container'>
-                <span class="important">${name}</span> : ${seeMore}
-                <br><br>Languages used: <span style="font-size: 15px; font-style: italic">${project.languages}</span>
-                
-                ${preview}
-
-                ${release}
-
-                <br><br><a href="${project.url}" target="_blank" rel="noopener noreferrer">Repo url</a>
-            <div>
-            `;
-        });
-    }
-
-    getProjects();
-
-    mailField = document.getElementById("send-mail");
-    mailField.addEventListener('click', () => {
-        let mailTo = "trabajosa49@gmail.com";
-        let emailSub = "Hi! I saw your portfolio and wanted to say...";
-
-        window.location.href = `mailto:${mailTo}&subject=${emailSub}`
-    });
-    
-    /* 
-    *    I choose GraphQL API over REST API to make fewer requests and fetch specific data in one request
-    *    See: https://docs.github.com/en/rest/about-the-rest-api/comparing-githubs-rest-api-and-graphql-api?apiVersion=2026-03-10
-    */
-
-    /*
-        async function loadProject(path) {
-            const container = document.getElementById("gh-projects");
-            
-            // Default message
-            container.textContent = "No projects found ;/"
-
-            // Cannot get projects filtering by starred list custom name. Roundabout by searching by topic
-            const res = await fetch(path, {headers: {"Authorization": "Bearer xxx"}}); // Token in /settings/tokens
-
-            const data = await res.json();
-            console.log(data)
-            // name, description, url, archived, languages_url (to get projects lang used), 
-            // homepage (to access project public site), releases_url (to access project releases. Requires tag: https://api.github.com/repos/xxx/<repo>/tags)
-            console.log(`Nombre ${data.name}, desc: ${data.description}, url: ${data.url}`);
-        };
-
-        // loadProject("https://api.github.com/repos/gandordev/steam-review-generator");
-        // loadProject("https://api.github.com/user/starred");
-        loadProject("search/repositories?q=user:gandordev+topic:test");
-    */
-</script>
-<style>
-    /*** General ***/
-    *:not(h1,h2) {
-        font-family: consolas;
-        font-size: large;
-        margin: 0; 
-        padding: 0;
-
-        /* test */
-        /* border-style: groove; */
-    }
-
-    h1,h2 {
-        margin: 0 auto 15px auto;
-        padding: 0;
-    }
-    h2 {
-        margin-top: 40px;
-        text-decoration: underline;
-        text-align: center;
-    }
-
-    a:hover, button:hover {
-        cursor: pointer;
-    }
-
-    img {
-        margin: 0 auto;
-    }
-
-    header {
-        margin-top: 20px;
-    }
-
-    body {
-        background-color: #faebd7;
-        margin: 0 auto;
-        width: 50%;
-        align-items: center;
-    }
-
-    .important {
-        font-weight: bold;
-        font-style: italic;
-    }
-
-    button {
-        background: none;
-        border-style: solid;
-    }
-
-    button:hover {
-        transition: background-color 200ms ease-in-out 0s;
-        background-color: #ae7830a2;
-    }
-    /******************/
-
-    /*** Navbar ***/
-    .navbar {
-        align-content: center;
-        display: grid;
-        width: auto;
-    }
-
-    .nav-logo {
-        max-width: 100px;
-        user-select: none;
-    }
-
-    /* Introduction */
-    .introduction {
-        display: grid;
-        align-items: center;
-        margin-bottom: 1em;
-    }
-
-    .introduction>p {
-        margin: 0 auto;
-    }
-
-    .buttons {
-        margin: 0 auto;
-        gap: 20px;
-        display: flex;
-        align-items: center;
-    }
-
-    .project-container {
-        border-style: dotted;
-        padding: 20px;
-        margin-bottom: 20px;
-        border-radius: 3px;
-    }
-
-    .gh-projects {
-        text-align: center;
-        align-items: center;
-        margin: 0 auto;
-    }
-
-    .action-btn {
-        padding: 5px 3px;
-    }
-
-    .body {
-        align-items: center;
-        margin: 50px;
-    }
-
-    .gh-projects-container {
-        text-align: center;
-    }
-
-    /*******************/
-
-
-</style>
 </html>
