@@ -37,11 +37,11 @@ jobs:
 
       - name: Generate repos JSON from GitHub GraphQL
         env:
-          GITHUB_GRAPHQL_API_URL: ${{secrets.GITHUB_GRAPHQL_API_URL}}
-          GITHUB_AUTHORIZATION_TOKEN: ${{ secrets.GITHUB_AUTHORIZATION_TOKEN }}
-          GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
-          GITHUB_TOPIC: ${{ secrets.GITHUB_TOPIC }}
-          GITHUB_REPOS_OUTPUT_FILE: "repos.json"
+          GH_GRAPHQL_API_URL: ${{secrets.GH_GRAPHQL_API_URL}}
+          GH_AUTHORIZATION_TOKEN: ${{ secrets.GH_AUTHORIZATION_TOKEN }}
+          GH_USERNAME: ${{ secrets.GH_USERNAME }}
+          GH_TOPIC: ${{ secrets.GH_TOPIC }}
+          GH_REPOS_OUTPUT_FILE: "repos.json"
         run: node resources/index.mjs
 
       - name: Setup Pages
