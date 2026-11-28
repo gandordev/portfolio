@@ -1,0 +1,14 @@
+{
+  "name": "portfolio-node",
+  "version": "1.0.0",
+  "private": true,
+  "description": "My portfolio",
+  "license": "ISC",
+  "type": "module",
+  "main": "resources/index.js",
+  "scripts": {
+    "fetch:local": "node --env-file=.env resources/index.js",
+    "fetch:ci": "node resources/index.js",
+    "serve": "npx --yes serve ."
+  }
+}
