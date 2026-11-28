@@ -1,0 +1,132 @@
+/******
+GENERAL
+******/
+*:not(h1, h2) {
+    font-family: consolas;
+    font-size: large;
+    margin: 0;
+    padding: 0;
+
+    /* test */
+    /* border-style: groove; */
+}
+
+h1,
+h2 {
+    margin: 0 auto 15px auto;
+    padding: 0;
+}
+
+h2 {
+    margin-top: 40px;
+    text-decoration: underline;
+    text-align: center;
+}
+
+a:hover,
+button:hover {
+    cursor: pointer;
+}
+
+img {
+    margin: 0 auto;
+}
+
+header {
+    margin-top: 20px;
+}
+
+body {
+    background-color: #faebd7;
+    margin: 0 auto;
+    width: 50%;
+    align-items: center;
+}
+
+.important {
+    font-weight: bold;
+    font-style: italic;
+}
+
+button {
+    background: none;
+    border-style: solid;
+}
+
+button:hover {
+    transition: background-color 200ms ease-in-out 0s;
+    background-color: #ae7830a2;
+}
+
+/******************/
+
+/*****
+NAVBAR
+*****/
+
+.navbar {
+    align-content: center;
+    display: grid;
+    width: auto;
+}
+
+.nav-logo {
+    max-width: 100px;
+    user-select: none;
+}
+
+.introduction {
+    display: grid;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+.introduction>p {
+    margin: 0 auto;
+}
+
+.buttons {
+    margin: 0 auto;
+    gap: 20px;
+    display: flex;
+    align-items: center;
+}
+/******************/
+
+/***
+BODY
+***/
+
+.body {
+    align-items: center;
+    margin: 50px;
+}
+
+.gh-projects {
+    text-align: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+/*******************/
+
+/*****************
+PROJECT CONTAINERS
+*****************/
+
+.gh-projects-container {
+    text-align: center;
+}
+
+.project-container {
+    border-style: dotted;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 3px;
+}
+
+.action-btn {
+    padding: 5px 3px;
+}
+
+/*******************/
